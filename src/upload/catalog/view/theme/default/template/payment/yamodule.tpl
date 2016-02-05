@@ -123,7 +123,14 @@
 	</div>
 <?php } ?>
 <script type="text/javascript"><!--
-$('#button-confirm').on('click', function() {
-  $('#paymentForm').submit();
-});
-//--></script>
+	$('#button-confirm').on('click', function() {
+		$.ajax({
+			type: 'get',
+			url: 'index.php?route=payment/yamodule/confirm',
+			cache: false,
+			success: function() {
+				$('#paymentForm').submit();
+			}
+		});
+	});
+	//--></script>

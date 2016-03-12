@@ -193,7 +193,7 @@ Class ModelYamodelYamarket extends Model
 		$data = array();
 		foreach($allowed as $key)
 			if (isset($tmp[$key]) && !empty($tmp[$key]))
-				$data[$key] = $tmp[$key]; # Порядок важен для Я.Маркета!!!
+				$data[$key] = $tmp[$key]; # пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ.пїЅпїЅпїЅпїЅпїЅпїЅпїЅ!!!
 		
 		$out = array('id' => $id, 'data' => $data, 'available' => ($available) ? 'true' : 'false');
 		if(!$this->config->get('ya_market_prostoy'))
@@ -203,7 +203,8 @@ Class ModelYamodelYamarket extends Model
 
 	function get_xml_header()
 	{
-		return '<?xml version="1.0" encoding="utf-8"?><!DOCTYPE yml_catalog SYSTEM "shops.dtd"><yml_catalog date="'.date('Y-m-d H:i').'">';
+		return '<?xml version="1.0" encoding="utf-8"?>'.
+		'<yml_catalog date="'.date('Y-m-d H:i').'">';
 	}
 
 	function get_xml_shop()

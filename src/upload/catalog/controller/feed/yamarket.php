@@ -4,7 +4,6 @@
 +author: Yandex.Money & Alexander Toporkov <toporchillo@gmail.com>
 */
 class ControllerFeedYamarket extends Controller {
-
 	public function index()
 	{
 		$this->load->model('yamodel/yamarket');
@@ -76,12 +75,12 @@ class ControllerFeedYamarket extends Controller {
 				$available = 'false';
 
 			$data = array();
+			//TODO Перепроверить все параметры на соответствие требованию к прайс-листу
 			$data['id'] = $product['product_id'];
 			$data['available'] = $available;
-			$data['url'] = str_replace('https://', 'http://', htmlspecialchars_decode($this->url->link('product/product', 'product_id=' . $product['product_id'])));
+			$data['url'] = str_replace("&amp;","&", $this->url->link('product/product', 'product_id=' . $product['product_id']));
 			$data['price'] = $product['price'];
-			if ($product['special'] && $product['special'] < $product['price'])
-				$data['price'] = $product['special'];
+			if ($product['special'] && $product['special'] < $product['price'])	$data['price'] = $product['special'];
 			$data['currencyId'] = $currency_default['code'];
 			$data['categoryId'] = $product['category_id'];
 			$data['vendor'] = $product['manufacturer'];
@@ -94,9 +93,9 @@ class ControllerFeedYamarket extends Controller {
 			//TODO	Добавить пользовательскую установку параметра $data['sales_notes'] по умолчанию
 			if ($product['minimum'] > 1)
 					$data['sales_notes'] = 'Минимальное кол-во для заказа: '.$product['minimum'];
-			if (isset($product['image'])) $data['picture'][] = $this->model_tool_image->resize($product['image'], 600, 600);
+			if (isset($product['image'])) $data['picture'][] = str_replace(array("%2F","%3A"),array("/",":"),rawurlencode(htmlspecialchars_decode($this->model_tool_image->resize($product['image'], 600, 600))));
 			foreach ($this->model_catalog_product->getProductImages($data['id']) as $pic)
-				$data['picture'][] = urlencode(htmlspecialchars_decode($this->model_tool_image->resize($pic['image'], 600, 600)));
+				$data['picture'][] = str_replace(array("%2F","%3A"),array("/",":"),rawurlencode(htmlspecialchars_decode($this->model_tool_image->resize($pic['image'], 600, 600))));
 
 			if ($this->config->get('ya_market_prostoy'))
 			{
@@ -136,7 +135,7 @@ class ControllerFeedYamarket extends Controller {
 		$this->response->addHeader('Content-Type: application/xml; charset=utf-8');
 		$this->response->setOutput($this->model_yamodel_yamarket->get_xml());
 	}
-	
+
 	public function makeOfferCombination($data, $product, $shop_currency, $offers_currency, $decimal_place, $object)
 	{
 		$colors = array();

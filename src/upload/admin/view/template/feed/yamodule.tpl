@@ -652,7 +652,7 @@
 							if (count($mws_global_error)==0){
 								if (!$cert_loaded){ ?>
 								<p><?php echo $txt_mws_main; ?><p>
-									<form id='mws_form' class="market_form form-horizontal" method='post' action='<?php echo $action; ?>'>
+									<form id='mws_form' class="mws_form form-horizontal" method='post' action='<?php echo $action; ?>'>
 										<div class="form-group">
 											<label class="col-sm-3 control-label" for="mws_download"><?php echo $lbl_mws_crt; ?></label>
 											<div class="col-sm-3">
@@ -706,7 +706,7 @@
 </div>
 <?php echo $footer; ?>
 <script type="text/javascript"><!--
-var step = new Array();
+/*var step = new Array();
 var total = 0;
 $('#mws_csr_gen').bind('click', function() {
 	if (confirm('<?php echo $lbl_mws_alert; ?>')) {
@@ -757,8 +757,8 @@ $('#mws_crt_load').on('click', function() {
 			});
 		}
 	}, 500);
-});
-
+});*/
+-->
 </script>
 
 <script type="text/javascript">

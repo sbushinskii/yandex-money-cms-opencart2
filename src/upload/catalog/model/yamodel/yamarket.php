@@ -146,7 +146,7 @@ Class ModelYamodelYamarket extends Model
 	function set_shop($name, $company, $url)
 	{
 		$this->shop['name'] = $this->prepare_field($name);
-		$this->shop['name'] = mb_substr($this->shop['name'], 0, 20);
+		$this->shop['name'] = substr($this->shop['name'], 0, 20);
 		$this->shop['company'] = $this->prepare_field($company);
 		$this->shop['url'] = $this->prepare_field($url);
 	}
@@ -193,7 +193,7 @@ Class ModelYamodelYamarket extends Model
 		$data = array();
 		foreach($allowed as $key)
 			if (isset($tmp[$key]) && !empty($tmp[$key]))
-				$data[$key] = $tmp[$key]; # ������� ����� ��� �.�������!!!
+				$data[$key] = $tmp[$key]; 
 		
 		$out = array('id' => $id, 'data' => $data, 'available' => ($available) ? 'true' : 'false');
 		if(!$this->config->get('ya_market_prostoy'))
